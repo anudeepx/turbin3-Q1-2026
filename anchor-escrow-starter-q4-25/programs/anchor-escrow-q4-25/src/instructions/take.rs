@@ -15,13 +15,18 @@ use crate::Escrow;
 pub struct Take<'info> {
     #[account(mut)]
     pub taker: Signer<'info>,
+    #[account(
+        address = escrow.maker
+    )]
     pub maker: SystemAccount<'info>,
     #[account(
-        mint::token_program = token_program
+        mint::token_program = token_program,
+        address = escrow.mint_a
     )]
     pub mint_a: InterfaceAccount<'info, Mint>,
     #[account(
-        mint::token_program = token_program
+        mint::token_program = token_program,
+        address = escrow.mint_b
     )]
     pub mint_b: InterfaceAccount<'info, Mint>,
 
